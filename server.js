@@ -74,12 +74,14 @@ app.post("/signup", (req, res) => {
 app.post("/login", (req, res) => {
   var email = req.body.user_email;
   var password = req.body.user_password;
-
+    console.log(email);
+    console.log(password);
   db.query("SELECT * FROM user WHERE user_email=? AND user_password=?", [email, password], function (err, result) {
       if (err) {
             console.log(err);            
           res.status(400).json({ status: false, message: err });
       } else {
+            console.log(result);
           if (result.length > 0) {
               const user = result[0];
               if (user.fee_status === false) {
