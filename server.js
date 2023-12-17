@@ -40,10 +40,6 @@ app.post("/signup", (req, res) => {
     var batchTime = req.body.batch_time;
     var startDate = req.body.start_date;
     var password = req.body.password;
-    console.log(age);
-    console.log(batchTime);
-    console.log(startDate);
-    console.log(phone);
     // Validate age
     if (age < 18 || age > 65) {
         res.status(400).json({ status: false, message: "Age must be between 18 and 65." });
@@ -56,7 +52,6 @@ app.post("/signup", (req, res) => {
 
     db.query(query, [name, email, age, gender, phone, batchTime, startDate, password, true], (err, result) => {
         if (err) {
-            console.log(err);
             res.status(400).json({ status: false, message: err });
         } else {
             const user = {
@@ -82,7 +77,8 @@ app.post("/login", (req, res) => {
 
   db.query("SELECT * FROM user WHERE user_email=? AND user_password=?", [email, password], function (err, result) {
       if (err) {
-          res.status(400).json({ status: false, message: "Enter Correct details!!" });
+            console.log(err);            
+          res.status(400).json({ status: false, message: err });
       } else {
           if (result.length > 0) {
               const user = result[0];
