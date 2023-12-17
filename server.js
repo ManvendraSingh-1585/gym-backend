@@ -80,6 +80,7 @@ app.post("/login", (req, res) => {
             console.log(err);            
           res.status(400).json({ status: false, message: err });
       } else {
+            return res.json(result);
           if (result.length > 0) {
               const user = result[0];
               if (user.fee_status === false) {
