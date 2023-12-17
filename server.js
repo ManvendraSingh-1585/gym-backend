@@ -47,7 +47,6 @@ app.post("/signup", (req, res) => {
     // Validate age
     if (age < 18 || age > 65) {
         res.status(400).json({ status: false, message: "Age must be between 18 and 65." });
-
         return;
     }
 
@@ -57,6 +56,7 @@ app.post("/signup", (req, res) => {
 
     db.query(query, [name, email, age, gender, phone, batchTime, startDate, password, true], (err, result) => {
         if (err) {
+            console.log(err);
             res.status(400).json({ status: false, message: err });
         } else {
             const user = {
