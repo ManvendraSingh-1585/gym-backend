@@ -52,12 +52,12 @@ app.post("/signup", (req, res) => {
     }
 
     const query = `
-    INSERT INTO user (user_name, user_email, user_age, user_gender, user_phone, user_batch_time, user_start_date, user_password)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    INSERT INTO user (user_name, user_email, user_age, user_gender, user_phone, user_batch_time, user_start_date, user_password, fee_status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    db.query(query, [name, email, age, gender, phone, batchTime, startDate, password], (err, result) => {
+    db.query(query, [name, email, age, gender, phone, batchTime, startDate, password, true], (err, result) => {
         if (err) {
-            res.status(400).json({ status: false, message: "Enter Correct details!!" });
+            res.status(400).json({ status: false, message: err });
         } else {
             const user = {
                 user_id: result.insertId,
