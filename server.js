@@ -40,10 +40,14 @@ app.post("/signup", (req, res) => {
     var batchTime = req.body.batch_time;
     var startDate = req.body.start_date;
     var password = req.body.password;
-
+    console.log(age);
+    console.log(batchTime);
+    console.log(startDate);
+    console.log(phone);
     // Validate age
     if (age < 18 || age > 65) {
         res.status(400).json({ status: false, message: "Age must be between 18 and 65." });
+
         return;
     }
 
